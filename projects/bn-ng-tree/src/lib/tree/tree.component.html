@@ -1,0 +1,22 @@
+<ul class="tree-view">
+  <li class="system-main {{ theme }}"
+     *ngFor="let item of items; let i = index;">
+     <span *ngIf="isCheckbox" class="systems-checkbox">
+       <input id="{{ i + item.name }}" (change)="onCheck(item)" type="checkbox" class="systems__checkbox" name="{{ item.name }}" [(ngModel)]="item.checked"/>
+       <label for="{{ i + item.name }}" class="systems-checkbox__label"></label>
+     </span>
+
+    <div class="systems__apps" (click)="onexpand(item, $event)">
+        <span class="systems__icon" *ngIf="!item.expanded && isChildExists(item)"><i class="fa fa-folder"></i></span>
+        <span class="systems__icon" *ngIf="item.expanded"><i class="fa fa-folder-open"></i></span>
+        <span class="systems__name" > {{ item.name }} </span>
+
+        <span class="systems__go" (click)="go(item,$event)"><i class="fa fa-arrow-right"></i></span>
+
+    </div>
+    <div [hidden]="!item.expanded" *ngIf="isChildExists(item)">
+      <bn-tree [isCheckbox]="isCheckbox" [items]="item.children"
+      [checkChildren]="checkChildren"></bn-tree>
+    </div>
+  </li>
+</ul>

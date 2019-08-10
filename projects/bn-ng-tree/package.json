@@ -1,0 +1,40 @@
+{
+  "name": "bn-ng-tree-lib",
+  "version": "1.5.0",
+  "peerDependencies": {
+    "@angular/common": ">=6.0.0",
+    "@angular/core": ">=6.0.0"
+  },
+  "keywords": [
+    "Angular 8 tree view",
+    "Angular 7 tree view",
+    "Angular 6 tree view",
+    "Angular 6,7,8 tree component",
+    "Ng tree",
+    "Ng2 tree",
+    "angular tree view",
+    "angular tree",
+    "bn ng tree",
+    "tree component",
+    "ng tree component",
+    "angular tree component"
+  ],
+  "description": "Angular 6,7,8 stylish tree component with checkbox and search functionality",
+  "license": "MIT",
+  "author": "bearnithi",
+  "person": {
+    "name": "nithi",
+    "email": "bearnithi@gmail.com",
+    "url": "http://bearnithi.com"
+  },
+  "homepage": "https://bn-ng-tree-angular.stackblitz.io/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bearnithi/bn-ng-tree.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bearnithi/bn-ng-tree/issues",
+    "email": "bearnithi@gmail.com"
+  }
+
+}

@@ -1,0 +1,8 @@
+<div class="position-relative">
+  <ng-container *ngIf="isSearch">
+    <bn-search-box (onSearch)="search($event)"></bn-search-box>
+  </ng-container>
+
+  <bn-tree [isCheckbox]="isCheckbox" [theme]="theme" [checkChildren]="checkChildren"
+  [items]="items | search: searchkey"></bn-tree>
+</div>
