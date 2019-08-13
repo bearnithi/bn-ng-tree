@@ -1,0 +1,162 @@
+* {
+  box-sizing: border-box;
+}
+
+$color-primary: #3f51b5;
+$color-secondary: #673ab7;
+$color-tertiary: #e91e63;
+$color-black: #333;
+
+.tree-view {
+  list-style-type: none;
+  transition: all .3s ease-in-out;
+}
+
+.node {
+  width: 60rem;
+  margin: 0 auto 50px auto;
+
+  &__apps {
+    color: $color-primary;
+    padding: 8px;
+    font-size: 16px;
+    margin: 6px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+
+    &:hover {
+      color: darken($color-primary, 20%);
+    }
+  }
+
+  &__icon {
+    font-size: 20px;
+    margin: 0 10px;
+  }
+
+  &__expands {
+    float: right;
+    margin-top: 5px;
+  }
+
+  &__search {
+    padding-left: 40px;
+  }
+
+  &__count {
+    font-size: 14px;
+    padding: 0 3px;
+    color: lighten($color-primary, 10%);
+  }
+
+  &__go {
+    text-align: right;
+    display: inline-block;
+    font-size: 14px;
+    color: $color-primary;
+    transition: all .2s;
+    padding: 0 10px;
+
+    &:hover {
+      transform: translateX(5px);
+    }
+  }
+}
+
+.node-header .header-primary {
+  margin-left: 180px;
+}
+
+.node-main {}
+
+
+
+.node-checkbox {
+  float: left;
+  margin-top: 10px;
+  margin-left: -18px;
+
+  &__label {
+    border: 1px solid #616161;
+    box-shadow: 3px 3px 5px #dedede;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    position: relative;
+    background: #fff;
+    cursor: pointer;
+    font-size: 12px;
+  }
+}
+
+
+.node__checkbox:checked+.node-checkbox__label::after {
+  position: absolute;
+  color: $color-primary;
+  content: '\2714';
+  font-weight: bold;
+  top: -2px;
+  left: 2px;
+}
+
+.node__checkbox {
+  display: none;
+}
+
+
+@media only screen and (max-width: 985px) {
+  .node {
+    width: 100%;
+  }
+}
+
+
+
+
+
+.secondary {
+  & .node__go {
+    color: $color-secondary;
+  }
+
+  & .node__apps {
+    color: $color-secondary;
+
+    &:hover {
+      color: darken($color-secondary, 20%);
+    }
+  }
+
+  & .node__checkbox:checked+.node-checkbox__label::after {
+    color: $color-secondary;
+  }
+
+  & .node__count {
+    color: lighten($color-secondary, 10%);
+  }
+
+}
+
+.tertiary {
+  & .node__go {
+    color: $color-tertiary;
+  }
+
+  & .node__apps {
+    color: $color-tertiary;
+
+    &:hover {
+      color: darken($color-tertiary, 20%);
+    }
+  }
+
+  & .node__checkbox:checked+.node-checkbox__label::after {
+    color: $color-tertiary;
+  }
+
+  & .node__count {
+    color: lighten($color-tertiary, 10%);
+  }
+
+}

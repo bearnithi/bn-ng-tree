@@ -1,25 +1,31 @@
 ## DESCRIPTION
 
-A simple and stylish **TREE COMPONENT** for Angular 6+. Just send a nested JSON as input, **bn-ng-tree** component will render it as a tree component.
+An Angular 6/7/8+ **TREE COMPONENT** with checkbox and search. Just send a nested JSON as input, **bn-ng-tree** component will render the nested JSON as a tree view in your Angular app.
 
 ![BN NG Tree Preview](http://bearnithi.com/bn-ng-tree.gif)
 
-[Live Demo](https://bn-ng-tree-angular.stackblitz.io/)
+[Live Demo](https://bn-ng-tree.bearnithi.com/)
+
+Note: Install font-awesome 4.7 to display icons in tree.
 
 ## INSTALLATION
+
 ```sh
 npm install bn-ng-tree-lib
 ```
 
 ## BN NG TREE - FEATURES
+
 1. [Search](#search-bn-ng-tree).
 2. [Themes](#change-tree-theme).
-3. [Checkbox](#enable-checkbox)
+3. [Custom CSS](#custom-css).
+4. [Checkbox](#enable-checkbox)
 
 ## USAGE
+
 ### Import the bn-ng-tree in the module
 
-```sh
+```javascript
 import { BnNgTreeModule } from 'bn-ng-tree-lib';
 ....
 ...
@@ -28,59 +34,131 @@ imports: [
     BnNgTreeModule
 ]
 ```
+
 ### Add the `bn-ng-tree` selector in the component html
 
-```sh
+```html
 <bn-ng-tree [items]="items" (onChange)="selectedItem($event)"></bn-ng-tree>
 ```
+
 It accepts `[items]` as input which should be a nested array of objects for the tree. Every object in the items array must have `name` and `children` property.
 
-### Get the Selected Node in the Tree Component 
-`bn-ng-tree` component outputs the `onChange` event. In the `$event` you will get the selected Object of the node in the tree.    
+### Get the Selected Node in the Tree Component
+
+`bn-ng-tree` component outputs the `onChange` event whenever the user clicks the select arrow button of the node. In the `$event` you will get the selected Object of the node in the tree.
+
+#### Show Select Button
+
+You can show / hide the select arrow button using `show-select-btn` input property. By default, It's false.
+
+```html
+<bn-ng-tree
+  [show-select-btn]="true"
+  [items]="items"
+  (onChange)="selectedItem($event)"
+></bn-ng-tree>
+```
 
 ### Search Tree Component
+
 The tree component search will be triggered `onChange` and `keypress.enter` events.
 
-You can enable / disable search option by using `isSearch` input in bn-ng-tree. It accepts boolean. By default search option is enabled.
+You can enable / disable search option by using `show-search` input in bn-ng-tree. It accepts boolean. By default search option is enabled.
 
 #### Enable Search
-```sh
-<bn-ng-tree [isSearch]="true" [items]="items" (onChange)="selectedItem($event)"></bn-ng-tree>
+
+```html
+<bn-ng-tree
+  [show-search]="true"
+  [items]="items"
+  (onChange)="selectedItem($event)"
+></bn-ng-tree>
 ```
+
 #### Disable Search
-```sh
-<bn-ng-tree [isSearch]="false" [items]="items" (onChange)="selectedItem($event)"></bn-ng-tree>
+
+```html
+<bn-ng-tree
+  [show-search]="false"
+  [items]="items"
+  (onChange)="selectedItem($event)"
+></bn-ng-tree>
+```
+
+### Show Child Nodes Count
+
+You can show the number of child nodes beside the node using `show-counts` input property. By default it's false.
+
+```html
+<bn-ng-tree
+  [show-search]="true"
+  [show-counts]="true"
+  [items]="items"
+  (onChange)="selectedItem($event)"
+></bn-ng-tree>
 ```
 
 ### Change Tree Theme
+
 Bn Ng Tree has built in themes.
 
-1. default
-2. greenish
-3. dark
-4. light
-5. sun
+1. primary
+2. secondary
+3. tertiary
 
 ```html
-<bn-ng-tree [theme]="'dark'" [isSearch]="false" [items]="items" (onChange)="selectedItem($event)"></bn-ng-tree>
+<bn-ng-tree
+  [theme]="'secondary'"
+  [show-search]="false"
+  [items]="items"
+  (onChange)="selectedItem($event)"
+></bn-ng-tree>
 ```
 
-### Enable Checkbox 
-To enable checkbox, add the `[isCheckbox]` to `true` in the **bn-ng-tree**
+### Custom CSS
+
+You can add your css class to the `bn-ng-tree` using `style-class` input property. It accepts the class name as string.
 
 ```html
-<bn-ng-tree [isCheckbox]="true" [theme]="currentTheme" [isSearch]="false" [items]="items"
-     (onChange)="selectedItem($event)" (onChecked)="checkedItems($event)"></bn-ng-tree>
+<bn-ng-tree
+  [theme]="'secondary'"
+  [style-class]="'my-tree'"
+  [show-search]="false"
+  [items]="items"
+  (onChange)="selectedItem($event)"
+></bn-ng-tree>
+```
+
+### Enable Checkbox
+
+To enable checkbox, add the `[show-checkbox]` to `true` in the **bn-ng-tree**
+
+```html
+<bn-ng-tree
+  [show-checkbox]="true"
+  [theme]="currentTheme"
+  [show-search]="false"
+  [items]="items"
+  (onChange)="selectedItem($event)"
+  (onChecked)="checkedItems($event)"
+></bn-ng-tree>
 ```
 
 #### Enable auto checkbox selection in child nodes
-On parent node check, all the child nodes will gets checked if you use `[checkChildren]` property binding.
+
+On parent node check, all the child nodes will gets checked if you use `[auto-check-child]` property binding.
 
 ```html
-<bn-ng-tree [isCheckbox]="true" [checkChildren]="true" [theme]="currentTheme" [isSearch]="false" [items]="items"
-     (onChange)="selectedItem($event)" (onChecked)="checkedItems($event)"></bn-ng-tree>
+<bn-ng-tree
+  [show-checkbox]="true"
+  [auto-check-child]="true"
+  [theme]="currentTheme"
+  [show-search]="false"
+  [items]="items"
+  (onChange)="selectedItem($event)"
+  (onChecked)="checkedItems($event)"
+></bn-ng-tree>
 ```
-
 
 #### Get Checked/Unchecked nodes from Tree
 
@@ -180,136 +258,172 @@ checkedItems(checkedItems) {
 ## Sample Code
 
 ### app.module.ts
+
 ```typescript
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
-import { BnNgTreeModule } from 'bn-ng-tree-lib';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { AppComponent } from "./app.component";
+import { BnNgTreeModule } from "bn-ng-tree-lib";
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    BnNgTreeModule
-  ],
+  declarations: [AppComponent],
+  imports: [BrowserModule, BnNgTreeModule],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
-
+export class AppModule {}
 ```
 
-
 ### app.component.html
+
 ```html
 <section class="tree-container">
   <h2>Angular 6 Tree Component</h2>
   <div class="tree-box">
-  <bn-ng-tree [isCheckbox]="true" [isSearch]="true" [items]="items" [checkChildren]="true"
-     (onChange)="selectedItem($event)" (onChecked)="checkedItems($event)"></bn-ng-tree>
+    <bn-ng-tree
+      [show-checkbox]="true"
+      [show-select-btn]="true"
+      [show-counts]="true"
+      [show-search]="true"
+      [items]="items"
+      [auto-check-child]="true"
+      (onChange)="selectedItem($event)"
+      (onChecked)="checkedItems($event)"
+    ></bn-ng-tree>
   </div>
 
   <div *ngIf="currentItem" class="selected-item">
     <h2>Selected Item</h2>
     <div class="selected-box">
-      <h4>Name: </h4>
+      <h4>Name:</h4>
       {{ currentItem.name }}
     </div>
-    
   </div>
-  
 </section>
-
 ```
 
 ### app.component.ts
+
 ```typescript
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'bn-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "bn-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  title = 'bn';
-  items = [{
-    name: "India",
-    children: [{
-      name: "North India",
+  title = "bn";
+  items = [
+    {
+      name: "India",
+      children: [
+        {
+          name: "North India",
 
-      children: [{
-        name: "Delhi",
-        children: [{
-          name: "Taj Mahal",
-          children: []
-        }]
-      }, {
-        name: "Mumbai",
-        children: [{
-          name: "North mumbai",
-          children: []
-        }, {
-          name: "South Mumbai",
-          children: []
-        }]
-      }]
-    }, {
-      name: "America",
-      children: [{
-        name: "New York",
-        children: []
-      }, {
-        name: "Mexico",
-        children: []
-      }]
-    }]
-  },
-  {
-    name: "Africa",
-    children: [{
-      name: "Tanzania",
-      children: [{
-        name: "Area one",
-        children: []
-      }, {
-        name: "Area Two",
-        children: []
-      }]
-    }, {
-      name: "South Africa",
-      children: [{
-        name: "Johnesberg",
-        children: []
-      }, {
-        name: "Area three",
-        children: []
-      }]
-    }]
-  }, {
-    name: "Rwanda",
-    children: [{
-      name: "Area four",
-      children: [{
-        name: "Sub Area",
-        children: []
-      }, {
-        name: "Sub Area two",
-        children: []
-      }]
-    }, {
-      name: "Area five",
-      children: [{
-        name: "Sub Area One",
-        children: []
-      }, {
-        name: "Sub Area two",
-        children: []
-      }]
-    }]
-  }];
+          children: [
+            {
+              name: "Delhi",
+              children: [
+                {
+                  name: "Taj Mahal",
+                  children: []
+                }
+              ]
+            },
+            {
+              name: "Mumbai",
+              children: [
+                {
+                  name: "North mumbai",
+                  children: []
+                },
+                {
+                  name: "South Mumbai",
+                  children: []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          name: "America",
+          children: [
+            {
+              name: "New York",
+              children: []
+            },
+            {
+              name: "Mexico",
+              children: []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: "Africa",
+      children: [
+        {
+          name: "Tanzania",
+          children: [
+            {
+              name: "Area one",
+              children: []
+            },
+            {
+              name: "Area Two",
+              children: []
+            }
+          ]
+        },
+        {
+          name: "South Africa",
+          children: [
+            {
+              name: "Johnesberg",
+              children: []
+            },
+            {
+              name: "Area three",
+              children: []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: "Rwanda",
+      children: [
+        {
+          name: "Area four",
+          children: [
+            {
+              name: "Sub Area",
+              children: []
+            },
+            {
+              name: "Sub Area two",
+              children: []
+            }
+          ]
+        },
+        {
+          name: "Area five",
+          children: [
+            {
+              name: "Sub Area One",
+              children: []
+            },
+            {
+              name: "Sub Area two",
+              children: []
+            }
+          ]
+        }
+      ]
+    }
+  ];
 
   currentItem;
 
@@ -322,10 +436,11 @@ export class AppComponent {
     console.log(items.unchecked);
   }
 }
-
 ```
 
 ## VERSIONING
+
+1.6.0 - Show Child Counts. Custom CSS. Theme Designs Changed. Checkbox Selection Bug Fixed.
 
 1.5.0 - Checkbox auto child selection. Search feature is case insensitive now.
 

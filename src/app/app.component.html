@@ -1,2 +1,7 @@
-<bn-ng-tree [isCheckbox]="true" [isSearch]="true" [items]="items" [checkChildren]="true"
-     (onChange)="selectedItem($event)" (onChecked)="checkedItems($event)"></bn-ng-tree>
+<bn-ng-tree [show-checkbox]="true" [show-search]="true" [items]="items"
+     [auto-check-child]="true"
+     (onChange)="selectedItem($event)"
+     (onChecked)="checkedItems($event)"
+     [show-counts]="true"
+     [show-select-btn]="true"
+     [style-class]="'my-class'"></bn-ng-tree>

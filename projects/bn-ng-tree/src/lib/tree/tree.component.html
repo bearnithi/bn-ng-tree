@@ -1,22 +1,24 @@
 <ul class="tree-view">
-  <li class="system-main {{ theme }}"
-     *ngFor="let item of items; let i = index;">
-     <span *ngIf="isCheckbox" class="systems-checkbox">
-       <input id="{{ i + item.name }}" (change)="onCheck(item)" type="checkbox" class="systems__checkbox" name="{{ item.name }}" [(ngModel)]="item.checked"/>
-       <label for="{{ i + item.name }}" class="systems-checkbox__label"></label>
-     </span>
+  <li class="node-main {{ theme }}" *ngFor="let item of items; let i = index;">
+    <span *ngIf="isCheckbox" class="node-checkbox">
+      <input [attr.id]="setUUID(item)" (change)="onCheck(item)" type="checkbox" class="node__checkbox" [name]="item.name"
+        [(ngModel)]="item.checked" />
+      <label [attr.for]="item.bnTreeUUID" class="node-checkbox__label"></label>
+    </span>
 
-    <div class="systems__apps" (click)="onexpand(item, $event)">
-        <span class="systems__icon" *ngIf="!item.expanded && isChildExists(item)"><i class="fa fa-folder"></i></span>
-        <span class="systems__icon" *ngIf="item.expanded"><i class="fa fa-folder-open"></i></span>
-        <span class="systems__name" > {{ item.name }} </span>
+    <div class="node__apps" (click)="expandNode(item, $event)">
+      <span class="node__icon" *ngIf="!item.expanded"><i class="fa fa-folder"></i></span>
+      <span class="node__icon" *ngIf="item.expanded"><i class="fa fa-folder-open"></i></span>
+      <span class="node__name"> {{ item.name }} </span>
+      <span class="node__count" *ngIf="showNodeCounts">({{ item.children ? item.children.length : 0 }})</span>
 
-        <span class="systems__go" (click)="go(item,$event)"><i class="fa fa-arrow-right"></i></span>
+      <span class="node__go" *ngIf="showSelectBtn" (click)="selectNode(item,$event)"><i
+          class="fa fa-arrow-right"></i></span>
 
     </div>
-    <div [hidden]="!item.expanded" *ngIf="isChildExists(item)">
-      <bn-tree [isCheckbox]="isCheckbox" [items]="item.children"
-      [checkChildren]="checkChildren"></bn-tree>
+    <div [hidden]="!item.expanded" *ngIf="hasChildNodes(item)">
+      <bn-tree [isCheckbox]="isCheckbox" [items]="item.children" [checkChildren]="checkChildren" [uniqueID]="uniqueID"
+        [showSelectBtn]="showSelectBtn" [showNodeCounts]="showNodeCounts"></bn-tree>
     </div>
   </li>
 </ul>

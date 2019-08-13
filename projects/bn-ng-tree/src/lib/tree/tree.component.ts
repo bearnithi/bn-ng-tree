@@ -4,13 +4,16 @@ import { BnNgTreeService } from '../services/bn-ng-tree.service';
 @Component({
   selector: 'bn-tree',
   templateUrl: './tree.component.html',
-  styleUrls: ['./tree.component.css']
+  styleUrls: ['./tree.component.scss']
 })
 export class TreeComponent implements OnInit {
-  @Input() items: any;
+  @Input() items: Array<any> = [];
   @Input() theme: string;
-  @Input() isCheckbox: boolean = false;
-  @Input() checkChildren: boolean = false;
+  @Input() isCheckbox = false;
+  @Input() checkChildren = false;
+  @Input() showSelectBtn: boolean;
+  @Input() uniqueID: any;
+  @Input() showNodeCounts: boolean;
 
   constructor(private treeService: BnNgTreeService) { }
 
@@ -18,23 +21,21 @@ export class TreeComponent implements OnInit {
 
   }
 
-  onexpand(item, e) {
-
+  expandNode(item, e) {
     if (item.expanded) {
       item.expanded = !item.expanded;
       return;
-    } else {
-      if (item.children) {
-        if (item.children.length > 0) {
-          item.expanded = true;
-        } else {
-          item.expanded = false;
-        }
-      }
     }
+
+    if (this.hasChildNodes(item)) {
+      item.expanded = true;
+    } else {
+      item.expanded = false;
+    }
+
   }
 
-  go(item, e) {
+  selectNode(item, e) {
     e.stopPropagation();
     this.treeService.setSelectedItem(item);
   }
@@ -42,12 +43,12 @@ export class TreeComponent implements OnInit {
   onCheck(item) {
     if (item.checked) {
       this.treeService.addCheckedItem(item, this.checkChildren);
-    } else if(item.checked === false) {
+    } else if (item.checked === false) {
       this.treeService.removeCheckedItem(item, this.checkChildren);
     }
   }
 
-  isChildExists(item) {
+  hasChildNodes(item) {
     if (item.children) {
       if (item.children.length > 0) {
         return true;
@@ -57,6 +58,15 @@ export class TreeComponent implements OnInit {
     }
 
     return false;
+  }
+
+  setUUID(node) {
+    if (!node.bnTreeUUID) {
+      node.bnTreeUUID = this.treeService.generateUUID();
+    }
+
+    return node.bnTreeUUID;
+
   }
 
 }

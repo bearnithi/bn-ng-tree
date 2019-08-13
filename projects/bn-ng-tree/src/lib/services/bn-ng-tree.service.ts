@@ -26,6 +26,16 @@ export class BnNgTreeService {
 
   constructor() { }
 
+  generateUUID() {
+    let dt = new Date().getTime();
+    const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      const r = (dt + Math.random() * 16) % 16 | 0;
+      dt = Math.floor(dt / 16);
+      return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+    return uuid;
+  }
+
   setSelectedItem(item): void {
     this.selectedItem.next(item);
   }
@@ -47,6 +57,7 @@ export class BnNgTreeService {
     };
 
     setCheckedItems(allItems);
+    this.checkedItemsSub.next(true);
   }
 
   addCheckedItem(item, includeChildren?: boolean): void {
@@ -133,5 +144,12 @@ export class BnNgTreeService {
     };
 
     removeNode(allNode);
+  }
+
+  clearChecked() {
+    this.checkedItems = {
+      checked: [],
+      unchecked: []
+    };
   }
 }
