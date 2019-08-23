@@ -1,12 +1,13 @@
 <ul class="tree-view">
   <li class="node-main {{ theme }}" *ngFor="let item of items; let i = index;">
     <span *ngIf="isCheckbox" class="node-checkbox">
-      <input [attr.id]="setUUID(item)" (change)="onCheck(item)" type="checkbox" class="node__checkbox" [name]="item.name"
+      <input [attr.id]="setUUID(item)" (change)="onCheck(item)"
+        type="checkbox" class="node__checkbox" [name]="item.name"
         [(ngModel)]="item.checked" />
       <label [attr.for]="item.bnTreeUUID" class="node-checkbox__label"></label>
     </span>
 
-    <div class="node__apps" (click)="expandNode(item, $event)">
+    <div class="node__apps"   [ngClass]="{'selected': item.bnTreeUUID === getSelectedNode().bnTreeUUID}" (click)="expandNode(item, $event)">
       <span class="node__icon" *ngIf="!item.expanded"><i class="fa fa-folder"></i></span>
       <span class="node__icon" *ngIf="item.expanded"><i class="fa fa-folder-open"></i></span>
       <span class="node__name"> {{ item.name }} </span>

@@ -15,7 +15,6 @@ export class BnNgTreeService {
   selectedItem = new BehaviorSubject<any>(false);
   checkedItemsSub = new BehaviorSubject<any>(false);
 
-
   callSelectedItem$ = this.selectedItem.asObservable();
   callCheckedItems$ = this.checkedItemsSub.asObservable();
 
@@ -23,6 +22,8 @@ export class BnNgTreeService {
     checked: [],
     unchecked: []
   };
+
+  selectedNode: any = {};
 
   constructor() { }
 
@@ -38,6 +39,11 @@ export class BnNgTreeService {
 
   setSelectedItem(item): void {
     this.selectedItem.next(item);
+    this.selectedNode = item;
+  }
+
+  getSelectedItem(): any {
+    return this.selectedNode ? this.selectedNode : {};
   }
 
 

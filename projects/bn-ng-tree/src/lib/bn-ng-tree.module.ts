@@ -6,6 +6,7 @@ import { SearchBoxComponent } from './search-box/search-box.component';
 import { FormsModule } from '@angular/forms';
 import { SearchPipe } from './pipes/search.pipe';
 import { TreeComponent } from './tree/tree.component';
+import { TreeToolbarComponent } from './tree-toolbar/tree-toolbar.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import { TreeComponent } from './tree/tree.component';
   providers: [
     BnNgTreeService
   ],
-  declarations: [BnNgTreeComponent, SearchBoxComponent, SearchPipe, TreeComponent],
+  declarations: [BnNgTreeComponent, SearchBoxComponent, SearchPipe, TreeComponent, TreeToolbarComponent],
   exports: [BnNgTreeComponent]
 })
 export class BnNgTreeModule { }

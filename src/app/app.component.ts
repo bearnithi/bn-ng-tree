@@ -10,19 +10,25 @@ export class AppComponent {
 
    items = [{
     name: "India",
+    checked: true,
     children: [{
       name: "North India",
+      checked: true,
 
       children: [{
         name: "Delhi",
+        checked: true,
         children: [{
           name: "Taj Mahal",
+          checked: true,
           children: []
         }]
       }, {
         name: "Mumbai",
+        checked: true,
         children: [{
           name: "North mumbai",
+          checked: true,
           children: []
         }, {
           name: "South Mumbai",

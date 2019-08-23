@@ -40,6 +40,10 @@ export class TreeComponent implements OnInit {
     this.treeService.setSelectedItem(item);
   }
 
+  getSelectedNode() {
+    return this.treeService.getSelectedItem();
+  }
+
   onCheck(item) {
     if (item.checked) {
       this.treeService.addCheckedItem(item, this.checkChildren);

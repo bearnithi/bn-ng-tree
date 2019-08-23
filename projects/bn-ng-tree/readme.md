@@ -440,6 +440,8 @@ export class AppComponent {
 
 ## VERSIONING
 
+1.6.2 - Node Selected Item Highlighted.
+
 1.6.0 - Show Child Counts. Custom CSS. Theme Designs Changed. Checkbox Selection Bug Fixed.
 
 1.5.0 - Checkbox auto child selection. Search feature is case insensitive now.
