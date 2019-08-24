@@ -94,10 +94,11 @@ export class AppComponent {
 
   selectedItem(item) {
     this.currentItem = item;
+    console.log(`SelectedItem: `, this.currentItem);
   }
 
   checkedItems(items) {
-    console.log(JSON.stringify(items.checked));
-    console.log(JSON.stringify(items.unchecked));
+    console.log(`checked items: `, items.checked);
+    console.log(`unchecked items: `, items.unchecked);
   }
 }

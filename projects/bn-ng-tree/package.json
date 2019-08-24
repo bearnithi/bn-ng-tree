@@ -1,6 +1,6 @@
 {
   "name": "bn-ng-tree-lib",
-  "version": "1.5.0",
+  "version": "1.6.3",
   "peerDependencies": {
     "@angular/common": ">=6.0.0",
     "@angular/core": ">=6.0.0"

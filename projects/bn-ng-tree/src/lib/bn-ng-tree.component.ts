@@ -14,11 +14,12 @@ export class BnNgTreeComponent implements OnInit, OnDestroy {
   @Input('unique-id') uniqueID: any;
   @Input('style-class') styleClass: string;
   @Input('auto-check-child') checkChildren = false;
-
+  @Input('disable-checkbox') disableCheckbox: boolean;
   @Input('show-counts') showCounts = false;
   @Input('show-select-btn') showSelectBtn = false;
   @Input('show-search') isSearch = true;
   @Input('show-checkbox') isCheckbox = false;
+
 
   @Output() onChange = new EventEmitter();
   @Output() onChecked = new EventEmitter();

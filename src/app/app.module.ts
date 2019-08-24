@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 /** DEV */
 // import { BnNgTreeModule } from 'projects/bn-ng-tree/src/public_api';
 
+/** PROD */
  import { BnNgTreeModule} from 'bn-ng-tree-lib';
 
 /** BUILD DIST */

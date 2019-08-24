@@ -67,22 +67,19 @@ $color-black: #333;
 .node-header .header-primary {
   margin-left: 180px;
 }
-.default {
-  .node__apps {
-    &.selected {
-      background: darken($color-primary, 10%);
+
+.node__apps {
+  &.selected {
+    background: darken($color-primary, 10%);
+    color: #fff;
+
+    & .node__count,
+    & .node__go {
       color: #fff;
-
-      & .node__count, & .node__go {
-        color: #fff;
-      }
-
     }
+
   }
 }
-
-
-
 
 .node-checkbox {
   float: left;
@@ -100,20 +97,27 @@ $color-black: #333;
     cursor: pointer;
     font-size: 12px;
   }
-}
 
 
-.node__checkbox:checked+.node-checkbox__label::after {
-  position: absolute;
-  color: $color-primary;
-  content: '\2714';
-  font-weight: bold;
-  top: -2px;
-  left: 2px;
 }
 
 .node__checkbox {
   display: none;
+
+  &:checked+.node-checkbox__label::after {
+    position: absolute;
+    color: $color-primary;
+    content: '\2714';
+    font-weight: bold;
+    top: -2px;
+    left: 2px;
+  }
+
+  &:disabled+.node-checkbox__label {
+    background-color: rgb(232, 232, 232);
+    border-color: rgb(216, 216, 216);
+    box-shadow: none;
+  }
 }
 
 
@@ -125,7 +129,40 @@ $color-black: #333;
 
 
 
+.primary {
+  & .node__go {
+    color: $color-primary;
+  }
 
+  & .node__apps {
+    color: $color-primary;
+
+    &:hover {
+      color: darken($color-primary, 20%);
+    }
+  }
+
+  & .node__checkbox:checked+.node-checkbox__label::after {
+    color: $color-primary;
+  }
+
+  & .node__count {
+    color: lighten($color-primary, 10%);
+  }
+
+  .node__apps {
+    &.selected {
+      background: darken($color-primary, 10%);
+      color: #fff;
+
+      & .node__count,
+      & .node__go {
+        color: #fff;
+      }
+
+    }
+  }
+}
 
 .secondary {
   & .node__go {
@@ -153,7 +190,8 @@ $color-black: #333;
       background: darken($color-secondary, 10%);
       color: #fff;
 
-      & .node__count, & .node__go {
+      & .node__count,
+      & .node__go {
         color: #fff;
       }
 
@@ -188,7 +226,8 @@ $color-black: #333;
       background: darken($color-tertiary, 10%);
       color: #fff;
 
-      & .node__count, & .node__go {
+      & .node__count,
+      & .node__go {
         color: #fff;
       }
 

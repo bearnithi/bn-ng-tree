@@ -14,6 +14,7 @@ export class TreeComponent implements OnInit {
   @Input() showSelectBtn: boolean;
   @Input() uniqueID: any;
   @Input() showNodeCounts: boolean;
+  @Input() disableCheckbox: boolean;
 
   constructor(private treeService: BnNgTreeService) { }
 

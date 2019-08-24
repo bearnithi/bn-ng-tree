@@ -129,9 +129,9 @@ You can add your css class to the `bn-ng-tree` using `style-class` input propert
 ></bn-ng-tree>
 ```
 
-### Enable Checkbox
+### Show Checkbox
 
-To enable checkbox, add the `[show-checkbox]` to `true` in the **bn-ng-tree**
+To show checkbox, add the `[show-checkbox]` to `true` in the **bn-ng-tree**
 
 ```html
 <bn-ng-tree
@@ -160,9 +160,27 @@ On parent node check, all the child nodes will gets checked if you use `[auto-ch
 ></bn-ng-tree>
 ```
 
+#### Disable Checkbox
+
+You can disable all checkbox in the tree using `[disable-checkbox]='true'` property. By default it's `false`
+
+```html
+<bn-ng-tree
+  [show-checkbox]="true"
+  [auto-check-child]="true"
+  [theme]="currentTheme"
+  [show-search]="false"
+  [items]="items"
+  [disable-checkbox]="true"
+  (onChange)="selectedItem($event)"
+  (onChecked)="checkedItems($event)"
+></bn-ng-tree>
+```
+
+
 #### Get Checked/Unchecked nodes from Tree
 
-To get the checked and unchecked items from the bn-ng-tree, Use **onChecked** output which emits an event everytime a user checks/unchecks a node in the bn-ng-tree. It returns an object with `checked` and `unchecked` properties which are array of checked/unchecked items.
+To get the checked and unchecked items from the bn-ng-tree, Use **onChecked** output event which emits an event everytime a user checks/unchecks a node in the bn-ng-tree. It returns an object with `checked` and `unchecked` properties which are array of checked/unchecked items.
 
 ```javascript
 checkedItems(checkedItems) {
@@ -439,6 +457,8 @@ export class AppComponent {
 ```
 
 ## VERSIONING
+
+1.6.3 - Disable All Checkbox.
 
 1.6.2 - Highlight selected node.
 
